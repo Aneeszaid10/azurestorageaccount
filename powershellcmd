@@ -1,0 +1,11 @@
+$resourceGroupName = Read-Host -Prompt "Enter the name of the resource group to be created"
+$location = Read-Host -Prompt "Enter the location (i.e. centralus)"
+$storageCount = Read-Host -prompt "Enter the number of Stoarge Account required"
+$suffix = Get-Random -Maximum 1000
+$deploymentName = "Deploymentno" + $suffix
+
+New-AzResourceGroup -Name $resourceGroupName -Location $location
+
+New-AzResourceGroupDeployment -Name $deploymentName -ResourceGroupName $resourceGroupName -storageCount $storageCount -Templatefile storage.json
+
+Write-Host "Press [ENTER] to continue ..."
